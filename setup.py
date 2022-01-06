@@ -45,7 +45,8 @@ class CMakeBuild(build_ext):
                       '-DCMAKE_PREFIX_PATH=' + LIBTORCH_ROOT,
                       '-DPYBIND11_PYTHON_VERSION={}'.format(PYTHON_VERSION),
                       '-DSPCONV_BuildTests=OFF',
-                      '-DCMAKE_CUDA_FLAGS="--expt-relaxed-constexpr"']
+                      '-DCMAKE_CUDA_FLAGS=--expt-relaxed-constexpr -gencode arch=compute_60,code=sm_60 -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__',
+                      '-DCMAKE_CUDA_ARCHITECTURES=60']
 
         cfg = 'Debug' if self.debug else 'Release'
         # cfg = 'Debug'
